@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staří mistři – Průvodce vybranými díly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #f8f6f0;
+            --bg-card: #ffffff;
+            --bg-card-alt: #f3efe6;
+            --text-main: #232323;
+            --text-muted: #5c5850;
+            --accent-gold: #b38728;
+            --accent-gold-dark: #8c6717;
+            --accent-gold-light: #f7eed7;
+            --border-color: #e2dbcd;
+            --dark-header: #14171a;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Header */
+        .hero {
+            background: linear-gradient(135deg, #0d1117 0%, #1f242d 50%, #11141a 100%);
+            color: #ffffff;
+            padding: 70px 20px 60px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-gold);
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            padding: 6px 16px;
+            border: 1px solid rgba(179, 135, 40, 0.4);
+            border-radius: 30px;
+            margin-bottom: 20px;
+            background: rgba(179, 135, 40, 0.08);
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 1.15rem;
+            color: #c7cbd1;
+            max-width: 780px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* Quick Nav / Table of Contents */
+        .nav-container {
+            max-width: 1200px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .toc-bar {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 18px 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .toc-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold-dark);
+            margin-right: 8px;
+        }
+
+        .toc-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            background: var(--bg-card-alt);
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--accent-gold-light);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        /* Artwork Section Card */
+        .artwork-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 50px;
+            overflow: hidden;
+            scroll-margin-top: 30px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .artwork-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .artwork-header {
+            background: linear-gradient(to right, #1a202c, #2d3748);
+            color: #ffffff;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .artwork-title-group h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .artwork-title-group .author {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 1.1rem;
+            color: #d1d5db;
+            font-style: italic;
+        }
+
+        .number-badge {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.08);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(179, 135, 40, 0.4);
+        }
+
+        /* Card Body Layout */
+        .artwork-content {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 36px;
+            padding: 32px;
+        }
+
+        @media (max-width: 960px) {
+            .artwork-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Image Display */
+        .image-pane {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .frame-wrapper {
+            position: relative;
+            background: #11141a;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid #2d3139;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .artwork-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: contain;
+            border-radius: 4px;
+            display: block;
+            background: #1a1d24;
+            transition: transform 0.3s ease;
+        }
+
+        .frame-wrapper:hover .artwork-img {
+            transform: scale(1.015);
+        }
+
+        .image-caption {
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .image-caption a {
+            color: var(--accent-gold-dark);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .image-caption a:hover {
+            text-decoration: underline;
+        }
+
+        /* Metadata Badges */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+            width: 100%;
+        }
+
+        .meta-pill {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+
+        .meta-pill-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.68rem;
+            letter-spacing: 0.5px;
+            color: var(--accent-gold-dark);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .meta-pill-value {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Text Details */
+        .details-pane {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .info-block {
+            background: #ffffff;
+            border-left: 4px solid var(--accent-gold);
+            padding: 16px 20px;
+            border-radius: 0 10px 10px 0;
+            background: linear-gradient(to right, rgba(247, 238, 215, 0.25), transparent);
+        }
+
+        .info-block-title {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-block-title svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--accent-gold-dark);
+            flex-shrink: 0;
+        }
+
+        .info-block p {
+            font-size: 0.96rem;
+            color: #374151;
+            text-align: justify;
+            line-height: 1.65;
+        }
+
+        /* Footer */
+        footer {
+            background: #14171a;
+            color: #9ca3af;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #2d3139;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            max-width: 600px;
+            margin: 0 auto 10px;
+        }
+
+        footer .credits {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Hero -->
+    <header class="hero">
+        <div class="hero-badge">Sbírky starého evropského a českého umění</div>
+        <h1>Staří mistři v obrazech</h1>
+        <p>Detailní průvodce historií, ikonografií a procesem tvorby mistrovských pláten z galerií a historických sbírek.</p>
+    </header>
+
+    <!-- Table of Contents Navigation -->
+    <div class="nav-container">
+        <nav class="toc-bar">
+            <span class="toc-label">Rychlý přehled:</span>
+            <a class="toc-link" href="#el-greco">1. El Greco</a>
+            <a class="toc-link" href="#coxie-patmos">2. Michiel Coxcie (Patmos)</a>
+            <a class="toc-link" href="#coxie-muceni">3. Michiel Coxcie (Mučení)</a>
+            <a class="toc-link" href="#hartmann">4. Johan Jakob Hartmann</a>
+            <a class="toc-link" href="#piazzetta">5. G. B. Piazzetta</a>
+            <a class="toc-link" href="#brand">6. Johann Christian Brand</a>
+            <a class="toc-link" href="#goyen">7. Jan van Goyen</a>
+        </nav>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="container">
+
+        <!-- 1. El Greco -->
+        <article class="artwork-card" id="el-greco">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Modlící se Kristus</h2>
+                    <div class="author">Doménikos Theotokópoulos, zv. El Greco (1541–1614)</div>
+                </div>
+                <div class="number-badge">I</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Doménikos_Theotokópulos_(called_El_Greco)_-_Christ_in_Prayer_-_Google_Art_Project.jpg" 
+                             alt="El Greco - Modlící se Kristus"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Modlící se Kristus</strong> (kolem 1595–1600)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/3/3b/Doménikos_Theotokópulos_(called_El_Greco)_-_Christ_in_Prayer_-_Google_Art_Project.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">cca 1595–1600</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Rozměry</span>
+                            <span class="meta-pill-value">61 × 46 cm</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>
+                            Obraz představuje Ježíše Krista v intimním okamžiku odevzdaného rozhovoru s Bohem Otcem. Kompozice je oproštěna od jakéhokoliv rušivého pozadí – pozornost diváka je plně soustředěna na Kristovu tvář s jemně zakloněnou hlavou a vlhkýma očima hledícíma k nebesům. Svatozář kolem hlavy není pevným kruhem, nýbrž pulzujícím světelným kosočtvercem, který vyzařuje přímo z jeho božské podstaty. Jde o typ hluboce procítěného devocionálního obrazu (pro soukromou zbožnost), který má v divákovi vyvolat soucit, vnitřní usebrání a mystické spojení s Kristovým utrpením a modlitbou.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>
+                            Dílo vzniklo ve vrcholném období El Grecova toledského působení. Původem krétský ikonopisec, který prošel benátskou školou Tiziana a římským manýrismem, nalezl v nábožensky zaníceném Španělsku 16. století ideální půdu pro svůj styl. El Greco záměrně deformuje renesanční anatomická pravidla: postavu protahuje do vertikály, odhmotňuje drapérii expresivními tahy štětcem a pracuje s chladným, nadpozemským světlem. Tímto radikálním pojetím předjímal moderní expresionismus o celá staletí dříve.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>
+                            Plátno se nachází ve sbírkách Národní galerie v Praze, kde představuje jeden z absolutních klenotů evropského manýrismu a španělského malířství. Patří do nevelkého počtu El Grecových originálů ve středoevropských veřejných sbírkách a dokumentuje sběratelskou prozíravost českých mecenášů a nákupních komisí 20. století.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- 2. Michiel Coxcie - Svatý Jan na Patmu -->
+        <article class="artwork-card" id="coxie-patmos">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Svatý Jan na Patmu</h2>
+                    <div class="author">Michiel Coxcie (1499–1592)</div>
+                </div>
+                <div class="number-badge">II</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Michiel_Coxie_-_St_John_the_Evangelist_on_Patmos.jpg" 
+                             alt="Michiel Coxcie - Svatý Jan na Patmu"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Svatý Jan na Patmu</strong> (cca 1540)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/e/e4/Michiel_Coxie_-_St_John_the_Evangelist_on_Patmos.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">cca 1540</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na dřevěné desce</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Rozměry</span>
+                            <span class="meta-pill-value">230 × 90 cm</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Původní určení</span>
+                            <span class="meta-pill-value">Katedrála sv. Víta / NGP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>
+                            Obraz líčí apoštola a evangelistu svatého Jana během jeho exilu na pustém egejském ostrově Patmos, kam byl vykázán římským císařem Domitianem. Zde Jan zažil velkolepá proroctví, která sepsal v biblické *Knize Zjevení (Apokalypse)*. Coxcie zobrazuje Jana jako mladého, oduševnělého muže s perem a pergamenem, jak v extatickém gestu pohlíží na nebesa. U jeho nohou stojí věrný orel, tradiční evangelijní atribut symbolizující výsostný duchovní vhled a schopnost pohlédnout do božského světla.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>
+                            Michiel Coxcie patřil k nejvýznamnějším představitelům severského romanismu – hnutí nizozemských mistrů, kteří odešli do Říma studovat díla vrcholné italské renesance (Raffaela a Michelangela). Coxcie byl dokonce současníky nazýván <em>„vlámským Raffaelem“</em> pro svou harmonickou kompozici, monumentální pojetí postav a ušlechtilou modelaci záhybů roucha, které mistrně propojil s nizozemskou citlivostí k materiálu a krajinnému detailu.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>
+                            Tato monumentální desková malba tvořila součást velkého oltářního triptychu věnovaného svatému Janovi. Obraz byl v průběhu staletí uchováván v církevních a panovnických sbírkách v Praze (spojen s historií chrámu sv. Víta a císařskými sbírkami Rudolfa II.), odkud posléze přešel do péče Národní galerie v Praze.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- 3. Michiel Coxcie - Mučení sv. Jana Evangelisty -->
+        <article class="artwork-card" id="coxie-muceni">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Mučení sv. Jana Evangelisty</h2>
+                    <div class="author">Michiel Coxcie (1499–1592)</div>
+                </div>
+                <div class="number-badge">III</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Michiel_Coxie_-_The_Martydom_of_St_Luke.jpg" 
+                             alt="Michiel Coxcie - Svatý Jan Evangelista / Mučení"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Mučení sv. Jana Evangelisty / Světec</strong> (cca 1540)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/a/ae/Michiel_Coxie_-_The_Martydom_of_St_Luke.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">cca 1540</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na dřevěné desce</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Rozměry</span>
+                            <span class="meta-pill-value">230 × 90 cm</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Párové dílo</span>
+                            <span class="meta-pill-value">Křídlo oltáře sv. Jana</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>
+                            Námět vychází ze Zlaté legendy (<em>Legenda Aurea</em>) a raně křesťanské tradice: před svým vyhnanstvím na Patmos byl Jan v Římě u Latinské brány odsouzen k hrozné smrti v kádi s vroucím olejem. Podle legendy se však stal zázrak – vroucí olej světci neublížil, nýbrž z něj vystoupil zcela svěží a posílen. Tento výjev oslavuje nezlomnou víru, která vítězí nad fyzickým utrpením i krutostí pozemských tyranů.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>
+                            Coxcie v tomto výjevu uplatnil svou hlubokou znalost italské renesanční anatomie a dramatického figurálního pohybu (figura serpentinata). V kontrastu s brutálním úsilím pohanských katů vkládá do Janova postoje klid, důstojnost a vnitřní mír. Monumentální vertikální formát desky umožnil autorovi vystavět monumentální sochařskou kompozici s velkolepým účinkem na diváka.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>
+                            Společně s protějškem <em>Svatý Jan na Patmu</em> představuje tato práce špičkový doklad vlivu italského cinquecenta na severské umění. Dílo bylo po staletí chráněno v prestižních církevních a státních sbírkách v Praze a dodnes demonstruje kosmopolitní charakter středoevropského renesančního sběratelství.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- 4. Johan Jakob Hartmann - Alegorie země -->
+        <article class="artwork-card" id="hartmann">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Alegorie země (Krajina se setkáním Krista s Marií a Martou)</h2>
+                    <div class="author">Johan Jakob Hartmann (1680–1738)</div>
+                </div>
+                <div class="number-badge">IV</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Jan_Jakub_Hartmann_-_Allegory_of_Earth_(Landscape_with_the_Encounter_of_Christ_with_Mary_and_Martha)_-_O_18772_-_National_Gallery_Prague.jpg" 
+                             alt="Johan Jakob Hartmann - Alegorie země"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Alegorie země</strong> (počátek 18. století)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/5/5a/Jan_Jakub_Hartmann_-_Allegory_of_Earth_(Landscape_with_the_Encounter_of_Christ_with_Mary_and_Martha)_-_O_18772_-_National_Gallery_Prague.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">cca 1710–1725</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na měděné desce</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Rozměry</span>
+                            <span class="meta-pill-value">83,6 × 114 cm</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Působiště</span>
+                            <span class="meta-pill-value">Praha (baroko)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>
+                            Obraz je alegorickou oslavou elementu Země, koncipovanou jako bohatá, rajská lesní krajina kypící životem, zvěří a rostlinstvem. V popředí se odehrává figurální scéna setkání Krista se sestrami Marií a Martou z Betanie (symbolika kontemplativního vs. aktivního pozemského života). Příroda je zde zobrazena nikoli jako divočina, ale jako božský řád a štědrá matka nabízející člověku hojnost plodů a útočiště.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>
+                            Johan Jakob Hartmann, narozený v Kutné Hoře a působící v Praze, byl nejvýraznějším českým následovníkem odkazu Jana Brueghela staršího („Sametového“). Specializoval se na tzv. kabinetní malbu. Malba na hladkou měděnou desku umožnila dosáhnout mimořádné emailové zářivosti a mikroskopické preciznosti v detailech listoví, peří ptáků a odlesků vodní hladiny. Hartmannovy lesní kompozice byly typické používáním tří plánů hloubky (hnědé popředí, zelený střed, modravé dálky).
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>
+                            Dílo bylo součástí slavného cyklu Čtyř živlů (Země, Voda, Vzduch, Oheň), které byly vysoce ceněným artiklem pražské šlechty 18. století (např. v interiérech Černínů či Nostitzů). Dnes je vystaveno ve stálé expozici Národní galerie v Praze jako vrcholný příklad barokní krajinomalby rudolfínsko-brueghelovské tradice v Čechách.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- 5. Giovanni Battista Piazzetta - Sv. Josef s Ježíškem -->
+        <article class="artwork-card" id="piazzetta">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Sv. Josef s Ježíškem</h2>
+                    <div class="author">Giovanni Battista Piazzetta (1682–1754)</div>
+                </div>
+                <div class="number-badge">V</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Piazzetta_-_St._Joseph_with_the_Child,_c._1729,_O_10655.jpg" 
+                             alt="G. B. Piazzetta - Sv. Josef s Ježíškem"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Sv. Josef s Ježíškem</strong> (cca 1729–1735)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/e/e1/Piazzetta_-_St._Joseph_with_the_Child,_c._1729,_O_10655.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">cca 1729</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Škola</span>
+                            <span class="meta-pill-value">Benátské pozdní baroko</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>
+                            Obraz zobrazuje svatého Josefa, pěstouna Páně, chovajícího malého Ježíška v náručí. V 17. a 18. století zažíval kult svatého Josefa velký rozkvět – Josef již nebyl zobrazován jen jako starý pasivní muž v pozadí, ale jako milující, ochraňující a něžný otec. Dítě se k němu tulí s bezmeznou důvěrou. Z obrazu vyzařuje hluboká lidskost, teplo domova a tiché rodičovské dojetí nad posláním božského dítěte.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>
+                            Benátčan Giovanni Battista Piazzetta byl prvním ředitelem benátské Akademie výtvarných umění a učitelem slavného G. B. Tiepola. Piazzetta se odlišoval od rokokové přeslazenosti své doby: jeho styl byl robustní, zemitý a psychologicky hluboký. Využíval dramatické šerosvitové kontrasty (chiaroscuro) inspirované Caravaggiem a teplou paletu hnědých, okrových a tělových tónů. Postavy modeloval hutnými pastózními nánosy barvy, což jim dodávalo hmatatelnou živost.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>
+                            Piazzettovy polopostavové komorní náboženské malby byly v 18. století vysoce ceněné sběrateli po celé Evropě. Tento obraz se dostal do českých šlechtických sbírek a následně byl převeden do sbírek Národní galerie v Praze (evidenční číslo O 10655), kde je vystaven jako ukázka vrcholného benátského chiaroscurismu.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- 6. Johann Christian Brand - Hrad Děvín -->
+        <article class="artwork-card" id="brand">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Krajina s hradem Děvínem při ústí řeky Moravy</h2>
+                    <div class="author">Johann Christian Brand (1722–1795)</div>
+                </div>
+                <div class="number-badge">VI</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Johann_Christian_Brand_-_Landscape_with_Děvín_Castle_at_the_Outfall_of_the_Morava_into_the_Danube_-_O_223_-_National_Gallery_Prague.jpg" 
+                             alt="Johann Christian Brand - Krajina s hradem Děvínem"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Krajina s hradem Děvínem</strong> (kolem 1770–1780)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/6/6e/Johann_Christian_Brand_-_Landscape_with_Děvín_Castle_at_the_Outfall_of_the_Morava_into_the_Danube_-_O_223_-_National_Gallery_Prague.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">cca 1775</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Žánr</span>
+                            <span class="meta-pill-value">Topografická veduta</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha (O 223)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>
+                            Obraz zachycuje dramatický pohled na skalní útes se zříceninou strategického hradu Děvín (na soutoku řek Moravy a Dunaje u Bratislavy). Místo opředené historií od dob Velké Moravy a Římské říše je zasazeno do idylického podvečerního osvětlení. V popředí sledujeme klidný život rybářů, převozníků a venkovanů na řece, zatímco v pozadí se otevírají dálavy dunajské nížiny. Jde o citlivé spojení historické vznešenosti hradu a poklidného přírodního rytmu.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>
+                            Johann Christian Brand, profesor vídeňské Akademie, byl klíčovou osobností středoevropského krajinářství 18. století. Překonal dosavadní konvenci „vykonstruovaných italských krajin“ a jako jeden z prvních začal systematicky malovat reálné scenérie rakouské a uherské monarchie přímo na základě kresebných studií v plenéru. Jeho práce položila základ ranému romantismu a věrné topografické malbě 19. století.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>
+                            Obraz vznikl pravděpodobně na zakázku šlechtického mecenáše obdivujícího podunajské panství. V 19. a 20. století se stal součástí historického fondu Společnosti vlasteneckých přátel umění v Čechách, jejíž sbírky přímo založily dnešní Národní galerii v Praze (sbírkový inventář O 223).
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- 7. Jan van Goyen - Strážní věže -->
+        <article class="artwork-card" id="goyen">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Strážní věže v ústí řeky</h2>
+                    <div class="author">Jan van Goyen (1596–1656)</div>
+                </div>
+                <div class="number-badge">VII</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Jan_van_Goyen_-_Shipping_with_a_View_of_Two_Towers_verzeichnisdergr00berg_0113.jpg" 
+                             alt="Jan van Goyen - Strážní věže v ústí řeky"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Strážní věže v ústí řeky</strong> (kolem 1640–1646)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/3/3d/Jan_van_Goyen_-_Shipping_with_a_View_of_Two_Towers_verzeichnisdergr00berg_0113.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">cca 1646</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na dřevěné desce</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Styl</span>
+                            <span class="meta-pill-value">Holandská tonální malba</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>
+                            Tento výjev je esencí holandského Zlatého věku (17. století). Zachycuje široké říční ústí s plachetnicemi, rybářskými bárkami a opevněnými středověkými baštami na břehu. Většinu obrazové plochy zabírá nekonečná klenba oblohy s dramatickými dešťovými mraky, pod nimiž se po vodní hladině míhají poryvy větru a paprsky slunce. Zobrazuje každodenní symbiózu holandského národa s vodním živlem – zdrojem obživy, námořního obchodu i obrany.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>
+                            Jan van Goyen z Haagu byl jedním z nejodvážnějších inovátorů krajinomalby. Zavedl tzv. tonální malbu: opustil pestré barvy a vystavěl celý obraz na harmonii jemných zemitých tónů (okr, šedozelená, stříbřitá hněď). Maloval neobyčejně rychle (alla prima) řídkou barvou, což mu umožnilo zachytit prchavou atmosféru, vlhký mořský vzduch a pohyb světla po vlnách s nesrovnatelnou lehkostí a poetikou.
+                        </p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>
+                            Obrazy Jana van Goyena byly v Čechách nesmírně oblíbené již od 17. a 18. století a nacházely se ve významných rodových sbírkách (např. v Nostické obrazárně). Dnes toto plátno v Národní galerii Praha reprezentuje to nejlepší ze slavné tradice holandské maríny a říční krajiny.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Tento dokument byl vytvořen jako přehledový průvodce mistrovskými díly evropského a středoevropského umění 16.–18. století.</p>
+        <div class="credits">Dokumentace uměleckých děl • Národní galerie v Praze / Staré umění</div>
+    </footer>
+
+</body>
+</html>
