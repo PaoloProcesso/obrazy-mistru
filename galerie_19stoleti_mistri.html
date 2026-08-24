@@ -68,11 +68,45 @@
 
         footer { background: #14171a; color: #9ca3af; text-align: center; padding: 40px 20px; border-top: 1px solid #2d3139; font-size: 0.9rem; }
         .credits { color: var(--accent-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
+        .back-btn-hero {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 8px 16px;
+    border: 1px solid rgba(179, 135, 40, 0.4);
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    transition: all 0.2s ease;
+}
+
+.back-btn-hero:hover {
+    background: var(--accent-gold);
+    color: #14171a;
+    border-color: var(--accent-gold);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .back-btn-hero {
+        position: static;
+        margin-bottom: 20px;
+    }
+}
     </style>
 </head>
 <body>
 
     <header class="hero">
+        <a href="index.html" class="back-btn-hero">← Zpět na přehled výstav</a>
         <div class="hero-badge">Sbírky 19. století a počátku moderny</div>
         <h1>Národní galerie v Praze</h1>
         <p>Detailní průvodce historií, ikonografií a procesem tvorby děl z galerijní expozice (srpen 2026).</p>
