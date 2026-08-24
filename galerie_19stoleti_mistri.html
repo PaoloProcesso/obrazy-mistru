@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Národní galerie – Umění 19. století a počátky moderny</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #f8f6f0;
+            --bg-card: #ffffff;
+            --bg-card-alt: #f3efe6;
+            --text-main: #232323;
+            --text-muted: #5c5850;
+            --accent-gold: #b38728;
+            --accent-gold-dark: #8c6717;
+            --accent-gold-light: #f7eed7;
+            --border-color: #e2dbcd;
+            --dark-header: #14171a;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0d1117 0%, #1f242d 50%, #11141a 100%);
+            color: #ffffff;
+            padding: 70px 20px 60px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-gold);
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            padding: 6px 16px;
+            border: 1px solid rgba(179, 135, 40, 0.4);
+            border-radius: 30px;
+            margin-bottom: 20px;
+            background: rgba(179, 135, 40, 0.08);
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 1.15rem;
+            color: #c7cbd1;
+            max-width: 780px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .toc-bar {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 18px 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .toc-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold-dark);
+            margin-right: 8px;
+        }
+
+        .toc-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.84rem;
+            font-weight: 500;
+            padding: 5px 12px;
+            background: var(--bg-card-alt);
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--accent-gold-light);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold-dark);
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .artwork-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 50px;
+            overflow: hidden;
+            scroll-margin-top: 30px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .artwork-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .artwork-header {
+            background: linear-gradient(to right, #1a202c, #2d3748);
+            color: #ffffff;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .artwork-title-group h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .artwork-title-group .author {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 1.1rem;
+            color: #d1d5db;
+            font-style: italic;
+        }
+
+        .number-badge {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.08);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(179, 135, 40, 0.4);
+        }
+
+        .artwork-content {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 36px;
+            padding: 32px;
+        }
+
+        @media (max-width: 960px) {
+            .artwork-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .image-pane {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .frame-wrapper {
+            position: relative;
+            background: #11141a;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid #2d3139;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .artwork-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: contain;
+            border-radius: 4px;
+            display: block;
+            background: #1a1d24;
+            transition: transform 0.3s ease;
+        }
+
+        .frame-wrapper:hover .artwork-img {
+            transform: scale(1.015);
+        }
+
+        .image-caption {
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .image-caption a {
+            color: var(--accent-gold-dark);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .image-caption a:hover {
+            text-decoration: underline;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+            width: 100%;
+        }
+
+        .meta-pill {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+
+        .meta-pill-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.68rem;
+            letter-spacing: 0.5px;
+            color: var(--accent-gold-dark);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .meta-pill-value {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .details-pane {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .info-block {
+            background: #ffffff;
+            border-left: 4px solid var(--accent-gold);
+            padding: 16px 20px;
+            border-radius: 0 10px 10px 0;
+            background: linear-gradient(to right, rgba(247, 238, 215, 0.25), transparent);
+        }
+
+        .info-block-title {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-block-title svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--accent-gold-dark);
+            flex-shrink: 0;
+        }
+
+        .info-block p {
+            font-size: 0.96rem;
+            color: #374151;
+            text-align: justify;
+            line-height: 1.65;
+        }
+
+        footer {
+            background: #14171a;
+            color: #9ca3af;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #2d3139;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            max-width: 600px;
+            margin: 0 auto 10px;
+        }
+
+        footer .credits {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-badge">Sbírky 19. století a počátku moderny</div>
+        <h1>Národní galerie v Praze</h1>
+        <p>Detailní průvodce historií, ikonografií a procesem tvorby děl z galerijní expozice (srpen 2026).</p>
+    </header>
+
+    <div class="nav-container">
+        <nav class="toc-bar">
+            <span class="toc-label">Díla:</span>
+            <a class="toc-link" href="#machek">I. Machek</a>
+            <a class="toc-link" href="#brozik">II. Brožík</a>
+            <a class="toc-link" href="#waldmuller">III. Waldmüller</a>
+            <a class="toc-link" href="#schikaneder-vrazda">IV. Schikaneder</a>
+            <a class="toc-link" href="#loir">V. Loir</a>
+            <a class="toc-link" href="#schikaneder-hradcany">VI. Schikaneder</a>
+            <a class="toc-link" href="#slavicek">VII. Slavíček</a>
+            <a class="toc-link" href="#chittussi">VIII. Chittussi</a>
+            <a class="toc-link" href="#radimsky">IX. Radimský</a>
+            <a class="toc-link" href="#courtens">X. Courtens</a>
+            <a class="toc-link" href="#hudecek">XI. Hudeček</a>
+            <a class="toc-link" href="#kupka">XII. Kupka</a>
+            <a class="toc-link" href="#friedrich">XIII. Friedrich</a>
+            <a class="toc-link" href="#kosarek">XIV. Kosárek</a>
+            <a class="toc-link" href="#liska">XV. Liška</a>
+            <a class="toc-link" href="#inspirace" style="border-color: var(--accent-gold); font-weight: 600;">Inspirace</a>
+        </nav>
+    </div>
+
+    <main class="container">
+
+        <!-- I. Antonín Machek -->
+        <article class="artwork-card" id="machek">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Portrét sochaře Malínského</h2>
+                    <div class="author">Antonín Machek (1775–1844)</div>
+                </div>
+                <div class="number-badge">I</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Antonin_Machek_-_Portrait_of_the_Sculptor_Josef_Malinsky_-_Google_Art_Project.jpg" 
+                             alt="Antonín Machek - Portrét sochaře Malínského"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Portrét sochaře Malínského</strong> (1818)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/c/c2/Antonin_Machek_-_Portrait_of_the_Sculptor_Josef_Malinsky_-_Google_Art_Project.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1818</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Obraz zachycuje předního českého empírového sochaře a řezbáře Josefa Malínského (autora náhrobků na Olšanech či Malostranském hřbitově). Malínský je zobrazen v neformálním oděvu se sochařským dlátem a nástroji u rozpracovaného díla. Z jeho tváře vyzařuje hluboké soustředění, intelektuální hloubka a hrdé sebevědomí měšťanského umělce nastupujícího národního obrození.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Antonín Machek byl zakladatelskou osobností českého biedermeieru a portrétního realismu. Zde mistrně opustil chladnou aristokratickou stylizaci a vytvořil vřelý, psychologicky pravdivý portrét svého blízkého přítele a spolupracovníka. Vyniká detailní plastická modelace tváře a civilní přirozené světlo.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Portrét patří k nejvýznamnějším dokladům raného měšťanského portrétu v Čechách a reprezentuje kulturní elitu probouzející se Prahy počátku 19. století ve sbírkách Národní galerie.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- II. Václav Brožík -->
+        <article class="artwork-card" id="brozik">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Portrét dámy s chrtem</h2>
+                    <div class="author">Václav Brožík (1851–1901)</div>
+                </div>
+                <div class="number-badge">II</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/2/28/Václav_Brožík_-_Portrait_of_a_Lady_with_a_Greyhound_-_Google_Art_Project.jpg" 
+                             alt="Václav Brožík - Portrét dámy s chrtem"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Portrét dámy s chrtem</strong> (1895–1897)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/2/28/Václav_Brožík_-_Portrait_of_a_Lady_with_a_Greyhound_-_Google_Art_Project.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1895–1897</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Zobrazuje elegantní dámu z vysoké pařížské nebo pražské společnosti ve večerních luxusních šatech v doprovodu ušlechtilého chrta. Pes je zde nejen symbolem věrnosti a aristokratického životního stylu, ale svou štíhlou anatomií podtrhuje graciézní siluetu a postoj portrétované ženy.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Brožík byl v 90. letech 19. století mezinárodní celebritou a profesorem na pařížské i pražské Akademii. Vedle monumentálních historických pláten byl vyhledávaným salónním portrétistou. V obraze demonstruje virtuózní akademickou techniku – lesk hedvábí, měkkost kožešin a rafinovanou světelnou harmonii.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Dílo reprezentuje vrchol Brožíkovy pozdní portrétní tvorby francouzského období, kdy české umění drželo krok s pařížskými trendy a mezinárodním salónním vkusem.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- III. Ferdinand Georg Waldmüller -->
+        <article class="artwork-card" id="waldmuller">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Děti dostávající snídani</h2>
+                    <div class="author">Ferdinand Georg Waldmüller (1793–1865)</div>
+                </div>
+                <div class="number-badge">III</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/7/70/Ferdinand_Georg_Waldmüller_-_Kinder_erhalten_ihr_Frühstück_(1859).jpg" 
+                             alt="Ferdinand Georg Waldmüller - Děti dostávající snídani"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Děti dostávající snídani</strong> (1859)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/7/70/Ferdinand_Georg_Waldmüller_-_Kinder_erhalten_ihr_Frühstück_(1859).jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1859</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na dřevě</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Idylický žánrový výjev z venkovského života: v prosluněné selské jizbě matka či babička nalévá mléko a rozděluje chléb houfu dětí. Scéna oslavuje prostý rodinný život, dětskou bezprostřednost, harmonii domova a řád všedního dne.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Vídeňský mistr F. G. Waldmüller byl radikálním reformátorem biedermeieru. Odmítl ateliérové akademické šablony a prosazoval malbu podle skutečnosti za přirozeného denního světla (byl přímým předchůdcem plenérismu). Vyniká tu dokonalá iluze slunečních paprsků pronikajících otevřenými dveřmi.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Obraz je špičkovým reprezentantem rakouského biedermeieru v pražských sbírkách a ukazuje silné kulturní vazby mezi Prahou a Vídní 19. století.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- IV. Jakub Schikaneder - Vražda v domě -->
+        <article class="artwork-card" id="schikaneder-vrazda">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Vražda v domě</h2>
+                    <div class="author">Jakub Schikaneder (1855–1924)</div>
+                </div>
+                <div class="number-badge">IV</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Jakub_Schikaneder_-_Murder_in_the_House_-_Google_Art_Project.jpg" 
+                             alt="Jakub Schikaneder - Vražda v domě"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Vražda v domě</strong> (1890)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/b/b4/Jakub_Schikaneder_-_Murder_in_the_House_-_Google_Art_Project.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1890</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Monumentální sociální a existenciální drama: na zasněženém pavlačovém dvorku pražského Židovského Města leží bezvládné tělo zavražděné mladé dívky. Kolem se v šoku sbíhají obyvatelé pavlačí – chudé stařeny, ženy v šátcích a dělníci. Obraz nepátrá po vrahovi, ale soustředí se na tragédii chudoby, bezmoci a anonymity velkoměsta.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Schikanederovo životní mistrovské dílo vzniklo pod vlivem naturalismu a sociální kritiky v době plánované asanace staré Prahy. Malíř si pro scénu vytvořil desítky studijních kreseb a docílil neobyčejného tlumeného osvětlení s mrazivou zimní atmosférou.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Obraz vzbudil obrovskou senzaci na Zemské jubilejní výstavě v Praze roku 1891 a dnes tvoří jeden z hlavních návštěvnických pilířů expozice 19. století ve Veletržním paláci.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- V. Luigi Loir -->
+        <article class="artwork-card" id="loir">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Podzemní dráha</h2>
+                    <div class="author">Luigi Loir (1845–1916)</div>
+                </div>
+                <div class="number-badge">V</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Luigi_Loir_-_The_Underground_Railway.jpg" 
+                             alt="Luigi Loir - Podzemní dráha"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Podzemní dráha</strong> (1899)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/7/7f/Luigi_Loir_-_The_Underground_Railway.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1899</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Fascinace moderní technikou a pulzujícím životem Paříže na sklonku století. Obraz zachycuje atmosféru u stanice pařížské podzemní dráhy (Métropolitain) s kouřem parních vlaků, plynovými lucernami a siluetami spěchajících chodců ve večerním šeru.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Francouzský malíř Luigi Loir byl vyhlášeným „malířem pařížských bulvárů“. Měl výjimečný cit pro vystižení kouře, mlhy, mokrého asfaltu a elektrického osvětlení ve velkoměstě na přelomu impresionismu a belle époque.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Dílo je součástí cenného francouzského fondu Národní galerie, dokládajícího zájem českých mecenášů a umělců o moderní městské motivy a život evropských metropolí.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- VI. Jakub Schikaneder - V podvečer na Hradčanech -->
+        <article class="artwork-card" id="schikaneder-hradcany">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>V podvečer na Hradčanech</h2>
+                    <div class="author">Jakub Schikaneder (1855–1924)</div>
+                </div>
+                <div class="number-badge">VI</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Jakub_Schikaneder_-_Evening_at_Hradcany.jpg" 
+                             alt="Jakub Schikaneder - V podvečer na Hradčanech"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>V podvečer na Hradčanech</strong> (1910)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/3/3a/Jakub_Schikaneder_-_Evening_at_Hradcany.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1910</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Nostalgický a tichý pohled na hradčanskou uličku v zimním soumraku. Osamělá ženská postava v černém plášti kráčí podél staré zdi osvětlené matným svitem plynové lucerny. Celou scénu halí modravý soumrak, ztišení a melancholie.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>V pozdním období Schikaneder opustil drastické sociální příběhy a věnoval se čisté náladové poetice ticha a samoty. Tlumená paleta modrých, šedých a hnědých tónů vytváří až symbolistickou meditaci nad mizejícím světem staré Prahy.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Dílo patří k nejpopulárnějším Schikanederovým obrazům pro svou neopakovatelnou pražskou atmosféru a dokonalé vystižení městského nokturna.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- VII. Antonín Slavíček -->
+        <article class="artwork-card" id="slavicek">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Eliščin most</h2>
+                    <div class="author">Antonín Slavíček (1870–1910)</div>
+                </div>
+                <div class="number-badge">VII</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Antonin_Slavicek_-_Eliscin_most_v_Praze_-_Google_Art_Project.jpg" 
+                             alt="Antonín Slavíček - Eliščin most"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Eliščin most</strong> (1906)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/8/8a/Antonin_Slavicek_-_Eliscin_most_v_Praze_-_Google_Art_Project.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1906</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Tempera a olej</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Pohled na starý řetězový Eliščin most v Praze (předchůdce Štefánikova mostu) s rušnou dopravou – kočáry, pěšími, tramvajemi a parníky na Vltavě pod zamračeným pražským nebem plným kouře z továren a městského shonu.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Antonín Slavíček, vůdčí osobnost českého impresionismu, maloval Prahu v neustálém pohybu. Dynamickými, pastózními tahy štětce a lomenými barevnými skvrnami dokázal zachytit chvění vzduchu, spěch a syrovou energii moderního města.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Jedno z klíčových děl českého moderního umění počátku 20. století, které definovalo svébytnou českou větev impresionismu a moderní městskou krajinomalbu.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- VIII. Antonín Chittussi -->
+        <article class="artwork-card" id="chittussi">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Trocadéro v Paříži</h2>
+                    <div class="author">Antonín Chittussi (1847–1891)</div>
+                </div>
+                <div class="number-badge">VIII</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Antonín_Chittussi_-_Trocadéro_v_Paříži.jpg" 
+                             alt="Antonín Chittussi - Trocadéro v Paříži"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Trocadéro v Paříži</strong> (1881)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/8/8f/Antonín_Chittussi_-_Trocadéro_v_Paříži.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1881</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Pohled přes řeku Seinu na monumentální palác Trocadéro (postavený pro Světovou výstavu 1878) a přilehlé nábřeží v Paříži. Scéna zachycuje široký říční prostor pod velkolepou klenbou francouzského nebe.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Chittussi byl prvním českým krajinářem, který plně vstřebal odkaz francouzské barbizonské školy. V Paříži maloval přímo v plenéru. V tomto obraze mistrně spojil monumentální architekturu s lyrickým vnímáním světla a vodní hladiny.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Plátno znamenalo zásadní mezník vymanění české krajinomalby z vlivu mnichovského akademismu a zahájilo moderní francouzskou orientaci českého umění.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- IX. Václav Radimský -->
+        <article class="artwork-card" id="radimsky">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Starý mlýn u Giverny</h2>
+                    <div class="author">Václav Radimský (1867–1946)</div>
+                </div>
+                <div class="number-badge">IX</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/3/31/Václav_Radimský_-_Starý_mlýn_u_Giverny.jpg" 
+                             alt="Václav Radimský - Starý mlýn u Giverny"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Starý mlýn u Giverny</strong> (1899)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/3/31/Václav_Radimský_-_Starý_mlýn_u_Giverny.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1899</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Romantický historický vodní mlýn na břehu řeky Epte ve francouzském Giverny. Zachycuje bujnou zeleň vrb, hladinu řeky se zrcadlícími se stromy a odlesky slunce ve vodních proudech.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Radimský žil přímo v Giverny v těsném sousedství Claude Moneta a jako jediný Čech byl přímým členem tamní mezinárodní impresionistické kolonie. Maloval technikou děleného rukopisu čistými, zářivými tóny barev s mistrným citem pro světlo na tekoucí vodě.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Dílo slavilo obrovský úspěch na pařížském Salonu a v Praze položilo základ českému nadšení pro čistý francouzský impresionismus.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- X. Frans Courtens -->
+        <article class="artwork-card" id="courtens">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Pod bukem</h2>
+                    <div class="author">Frans Courtens (1854–1943)</div>
+                </div>
+                <div class="number-badge">X</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/9/92/Frans_Courtens_-_Under_the_Beech_Tree.jpg" 
+                             alt="Frans Courtens - Pod bukem"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Pod bukem</strong> (1892)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/9/92/Frans_Courtens_-_Under_the_Beech_Tree.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1892</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Monumentální lesní interiér: mohutný kmen a rozložitá koruna starého buku, skrze jejíž listoví dopadají zářivé sluneční paprsky na lesní půdu posetou spadaným listím.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Belgický mistr Frans Courtens byl čelným představitelem severského plein-airismu a luminismu. Vyznačoval se robustní, pastózní texturou barvy nanášené špachtlí a schopností vyjádřit monumentální, až panteistickou sílu přírody.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Obraz byl zakoupen z mezinárodních výstav v 90. letech 19. století a reprezentuje kosmopolitní charakter sbírek moderního umění Národní galerie.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- XI. Antonín Hudeček -->
+        <article class="artwork-card" id="hudecek">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Potok v slunečním svitu</h2>
+                    <div class="author">Antonín Hudeček (1872–1941)</div>
+                </div>
+                <div class="number-badge">XI</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/1/17/Antonín_Hudeček_-_Potok_v_slunečním_svitu.jpg" 
+                             alt="Antonín Hudeček - Potok v slunečním svitu"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Potok v slunečním svitu</strong> (1894)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/1/17/Antonín_Hudeček_-_Potok_v_slunečním_svitu.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1894</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Kamenitý lesní potok vinoucí se stinným údolím, na který skrze koruny stromů dopadají třpytivé sluneční skvrny a vytvářejí jiskřivou hru světla a stínu.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Raná práce z Hudečkova formativního období v krajinářské škole Julia Mařáka (slavná malířská kolonie na Okoři). Zachycuje klíčový okamžik přerodu: odklon od mařákovského romantického lesního šerosvitu k odvážnému impresionistickému zachycení světelných reflexů.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Dílo dokumentuje zrod jedné z nejvýznamnějších osobností české krajinomalby přelomu 19. a 20. století.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- XII. František Kupka -->
+        <article class="artwork-card" id="kupka">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Druhý břeh Marny</h2>
+                    <div class="author">František Kupka (1871–1957)</div>
+                </div>
+                <div class="number-badge">XII</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/2/25/František_Kupka_-_Druhý_břeh_Marny.jpg" 
+                             alt="František Kupka - Druhý břeh Marny"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Druhý břeh Marny</strong> (1895)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/2/25/František_Kupka_-_Druhý_břeh_Marny.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1895</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Lyrický krajinný výsek řeky Marny nedaleko Paříže s klidnou hladinou, loďkou a stromy na protějším břehu v teplém odpoledním světle.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Kupkovo rané pařížské období, kdy se po příchodu z Vídně živil jako ilustrátor a maloval ještě realisticko-impresionistické krajiny. Obraz ukazuje Kupkovu mimořádnou citlivost k barvě a světlu ještě předtím, než přešel k symbolismu a následně vytvořil první abstraktní díla světového umění.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Zásadní studijní a sbírkový doklad raného uměleckého vývoje Františka Kupky v Národní galerii.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- XIII. Caspar David Friedrich -->
+        <article class="artwork-card" id="friedrich">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Severní moře v měsíční záři</h2>
+                    <div class="author">Caspar David Friedrich (1774–1840)</div>
+                </div>
+                <div class="number-badge">XIII</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Caspar_David_Friedrich_-_Das_Nördliche_Eismeer_im_Mondschein.jpg" 
+                             alt="Caspar David Friedrich - Severní moře v měsíční záři"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Severní moře v měsíční záři</strong> (1823)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/f/f0/Caspar_David_Friedrich_-_Das_Nördliche_Eismeer_im_Mondschein.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1823</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Mystická noční přímořská scenérie: balvany na břehu Severního moře, v dáli siluety plachetnic plujících po klidné hladině a měsíc prosvítající skrze dramatické mraky. Výjev je hlubokou křesťansko-filozofickou meditací: lodě symbolizují lidskou duši putující pozemským životem, moře představuje věčnost a měsíční svit Boží přítomnost v temnotě.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>C. D. Friedrich byl největším géniem německého romantismu. Maloval precizní, lazurní technikou, kde každý prvek kompozice nesl přísný symbolický význam.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Jedno z vůbec nejcennějších zahraničních děl romantismu v českých veřejných sbírkách.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- XIV. Adolf Kosárek -->
+        <article class="artwork-card" id="kosarek">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Zimní noc</h2>
+                    <div class="author">Adolf Kosárek (1830–1859)</div>
+                </div>
+                <div class="number-badge">XIV</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Adolf_Kosárek_-_Zimní_noc.jpg" 
+                             alt="Adolf Kosárek - Zimní noc"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Zimní noc</strong> (1857)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/a/ad/Adolf_Kosárek_-_Zimní_noc.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1857</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Zasněžená česká vesnická pláň za mrazivé noci. Uprostřed stojí chalupa se zářícím oknem, k níž po sněhu kráčí osamělý poutník, zatímco na obloze svítí měsíc vrhající stříbřité světlo na sněhové závěje.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>Adolf Kosárek, geniální zakladatel české realistické krajiny (zemřel předčasně na tuberkulózu ve věku 29 let), dokázal do prostého vesnického motivu vložit nesmírnou baladickou hloubku, cit a poetiku české zimy.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Absolutní klenot české krajinomalby 19. století, trvale vystavený ve sbírkách Národní galerie.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- XV. Emanuel Krescenc Liška -->
+        <article class="artwork-card" id="liska">
+            <div class="artwork-header">
+                <div class="artwork-title-group">
+                    <h2>Kain</h2>
+                    <div class="author">Emanuel Krescenc Liška (1852–1903)</div>
+                </div>
+                <div class="number-badge">XV</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" 
+                             src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Emanuel_Krescenc_Liška_-_Kain.jpg" 
+                             alt="Emanuel Krescenc Liška - Kain"
+                             loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Kain</strong> (1885)<br>
+                        <a href="https://upload.wikimedia.org/wikipedia/commons/7/7c/Emanuel_Krescenc_Liška_-_Kain.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Datace</span>
+                            <span class="meta-pill-value">1885</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Technika</span>
+                            <span class="meta-pill-value">Olej na plátně</span>
+                        </div>
+                        <div class="meta-pill">
+                            <span class="meta-pill-label">Sbírka</span>
+                            <span class="meta-pill-value">Národní galerie Praha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh, který obraz zobrazuje (Ikonografie a námět)
+                        </h3>
+                        <p>Starozákonní drama prvního lidského vraha: Kain prchá před Božím hněvem do pusté pouště poté, co zabil svého bratra Ábela. Postava je zachycena v křečovitém gestu hrůzy a zoufalství, s Kainovým znamením viny na čele.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Příběh vzniku díla (Umělecko-historický kontext)
+                        </h3>
+                        <p>E. K. Liška, významný malíř generace Národního divadla, vytvořil dílo na pomezí pozdního akademismu, temného romantismu a nastupujícího symbolismu. Využil expresivní šerosvit a dynamickou anatomii k vyjádření psychologického zhroucení člověka.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Historie a provenience obrazu
+                        </h3>
+                        <p>Reprezentativní ukázka české monumentální náboženské a historické malby závěru 19. století.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <!-- Sekce Inspirace -->
+        <div style="margin: 60px 0 30px; border-bottom: 2px solid var(--accent-gold); padding-bottom: 10px;" id="inspirace">
+            <h2 style="font-family: 'Cinzel', serif; color: var(--accent-gold-dark);">Obrazy pod čarou – Pro inspiraci</h2>
+        </div>
+
+        <article class="artwork-card" id="matousek1">
+            <div class="artwork-header" style="background: linear-gradient(to right, #2a2a2a, #3a3a3a);">
+                <div class="artwork-title-group">
+                    <h2>Grafické návrhy a uspořádání objektů (1)</h2>
+                    <div class="author">František Matoušek (1901–1961)</div>
+                </div>
+                <div class="number-badge" style="font-size:1.1rem;">Insp</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" src="https://sophisticagallery.cz/app/uploads/im-1498409081-594fe87975352-600x0-c-default.jpg" alt="František Matoušek - Grafické návrhy a uspořádání objektů (1)" loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Grafické návrhy a uspořádání objektů (1)</strong> (Meziválečné období)<br>
+                        <a href="https://sophisticagallery.cz/app/uploads/im-1498409081-594fe87975352-600x0-c-default.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            Zobrazený výjev & Kontext
+                        </h3>
+                        <p>Tvorba Františka Matouška pracuje s originálním uspořádáním objektů a grafickým designem. Jde o hru s formou, materiálem a prostorovou kompozicí.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            Umělecké zpracování a technika
+                        </h3>
+                        <p>Matoušek patřil k české meziválečné avantgardě (člen Skupiny 42 a SVU Mánes). Zde uplatnil svůj rukopis ovlivněný civilismem, městskou poetikou a architektonickým řádem všedního dne.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <article class="artwork-card" id="matousek2">
+            <div class="artwork-header" style="background: linear-gradient(to right, #2a2a2a, #3a3a3a);">
+                <div class="artwork-title-group">
+                    <h2>Grafické návrhy a uspořádání objektů (2)</h2>
+                    <div class="author">František Matoušek (1901–1961)</div>
+                </div>
+                <div class="number-badge" style="font-size:1.1rem;">Insp</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" src="https://sophisticagallery.cz/app/uploads/im-1498409079-594fe87796338-600x0-c-default.jpg" alt="František Matoušek - Grafické návrhy a uspořádání objektů (2)" loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Grafické návrhy a uspořádání objektů (2)</strong> (Meziválečné období)<br>
+                        <a href="https://sophisticagallery.cz/app/uploads/im-1498409079-594fe87796338-600x0-c-default.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            Zobrazený výjev & Kontext
+                        </h3>
+                        <p>Další ze strukturálních a grafických děl. Odráží Matouškovy experimenty s textilem (např. unikátní technika vytrhávané džínoviny) a materiálovou koláží.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            Umělecké zpracování a technika
+                        </h3>
+                        <p>Reflektuje meziválečné avantgardní snahy o prolnutí volného umění s designem, užitým uměním a novými, často surovými materiály.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <article class="artwork-card" id="bolf">
+            <div class="artwork-header" style="background: linear-gradient(to right, #2a2a2a, #3a3a3a);">
+                <div class="artwork-title-group">
+                    <h2>Auto</h2>
+                    <div class="author">Josef Bolf (*1971)</div>
+                </div>
+                <div class="number-badge" style="font-size:1.1rem;">Insp</div>
+            </div>
+            <div class="artwork-content">
+                <div class="image-pane">
+                    <div class="frame-wrapper">
+                        <img class="artwork-img" src="https://artlist.cz/app/uploads/2024/05/1447-bolf_car_05.jpg" alt="Josef Bolf - Auto" loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <strong>Auto</strong> (2005)<br>
+                        <a href="https://artlist.cz/app/uploads/2024/05/1447-bolf_car_05.jpg" target="_blank">Otevřít reprodukci v plném rozlišení ↗</a>
+                    </div>
+                </div>
+                <div class="details-pane">
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            Zobrazený výjev & Kontext
+                        </h3>
+                        <p>Obraz s motivem zchátralého vraku auta v bezútěšném, rozpadajícím se prostředí (typická kulisa normalizačních sídlišť). Slouží jako symbol úzkosti, osamění a vybledlé dětské paměti.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            Umělecké zpracování a technika
+                        </h3>
+                        <p>Josef Bolf patří k nejvýznamnějším současným českým malířům. Typická je pro něj technika proškrabávání voskového podkladu tuší, z níž vystupují ponuré dystopické vize plné zranitelnosti.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+    </main>
+    <footer>
+        <p>Tento dokument byl vytvořen jako přehledový průvodce expozicí 19. století a moderního umění.</p>
+        <div class="credits">Dokumentace uměleckých děl • Národní galerie v Praze</div>
+    </footer>
+</body>
+</html>
