@@ -367,12 +367,47 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
+        .back-btn-hero {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 8px 16px;
+    border: 1px solid rgba(179, 135, 40, 0.4);
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    transition: all 0.2s ease;
+}
+
+.back-btn-hero:hover {
+    background: var(--accent-gold);
+    color: #14171a;
+    border-color: var(--accent-gold);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .back-btn-hero {
+        position: static;
+        margin-bottom: 20px;
+    }
+}
     </style>
 </head>
 <body>
 
     <!-- Header / Hero -->
     <header class="hero">
+        <a href="index.html" class="back-btn-hero">← Zpět na přehled výstav</a>
         <div class="hero-badge">Sbírky starého evropského a českého umění</div>
         <h1>Staří mistři v obrazech</h1>
         <p>Detailní průvodce historií, ikonografií a procesem tvorby mistrovských pláten z galerií a historických sbírek.</p>
