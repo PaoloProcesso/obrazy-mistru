@@ -19,88 +19,361 @@
             --accent-gold-light: #f7eed7;
             --border-color: #e2dbcd;
             --dark-header: #14171a;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.12);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-primary); color: var(--text-main); line-height: 1.65; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
 
         .hero {
             background: linear-gradient(135deg, #0d1117 0%, #1f242d 50%, #11141a 100%);
-            color: #ffffff; padding: 70px 20px 60px; text-align: center; border-bottom: 3px solid var(--accent-gold);
+            color: #ffffff;
+            padding: 70px 20px 60px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-gold);
+            position: relative;
         }
-        .hero-badge {
-            display: inline-block; text-transform: uppercase; font-size: 0.78rem; letter-spacing: 3px; font-weight: 700; color: var(--accent-gold); padding: 6px 16px; border: 1px solid rgba(179, 135, 40, 0.4); border-radius: 30px; margin-bottom: 20px; background: rgba(179, 135, 40, 0.08);
-        }
-        .hero h1 { font-family: 'Cinzel', serif; font-size: 2.8rem; font-weight: 700; margin-bottom: 15px; }
-        .hero p { font-family: 'Lora', serif; font-size: 1.15rem; color: #c7cbd1; max-width: 780px; margin: 0 auto; font-style: italic; }
 
-        .nav-container { max-width: 1200px; margin: -30px auto 40px; padding: 0 20px; position: relative; z-index: 10; }
-        .toc-bar { background: #ffffff; border-radius: 12px; padding: 18px 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; }
-        .toc-label { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--accent-gold-dark); margin-right: 8px; }
-        .toc-link { text-decoration: none; color: var(--text-main); font-size: 0.84rem; font-weight: 500; padding: 5px 12px; background: var(--bg-card-alt); border-radius: 20px; transition: all 0.2s; border: 1px solid transparent; }
-        .toc-link:hover { background: var(--accent-gold-light); border-color: var(--accent-gold); color: var(--accent-gold-dark); }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
-        .artwork-card { background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); margin-bottom: 50px; overflow: hidden; scroll-margin-top: 30px; }
-        .artwork-header { background: linear-gradient(to right, #1a202c, #2d3748); color: #ffffff; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; border-bottom: 2px solid var(--accent-gold); }
-        .artwork-title-group h2 { font-family: 'Cinzel', serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 4px; }
-        .artwork-title-group .author { font-family: 'Lora', serif; font-size: 1.1rem; color: #d1d5db; font-style: italic; }
-        .number-badge { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 800; color: var(--accent-gold); background: rgba(255, 255, 255, 0.08); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(179, 135, 40, 0.4); }
-
-        .artwork-content { display: grid; grid-template-columns: 420px 1fr; gap: 36px; padding: 32px; }
-        @media (max-width: 960px) { .artwork-content { grid-template-columns: 1fr; } }
-
-        .image-pane { display: flex; flex-direction: column; align-items: center; }
-        .frame-wrapper { background: #11141a; padding: 12px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); border: 1px solid #2d3139; width: 100%; max-width: 400px; display: flex; justify-content: center; align-items: center; min-height: 250px; }
-        .artwork-img { max-width: 100%; height: auto; max-height: 480px; object-fit: contain; border-radius: 4px; display: block; }
-        .image-caption { margin-top: 14px; font-size: 0.82rem; color: var(--text-muted); text-align: center; }
-        .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 16px; width: 100%; }
-        .meta-pill { background: var(--bg-card-alt); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; }
-        .meta-pill-label { font-weight: 700; text-transform: uppercase; font-size: 0.68rem; color: var(--accent-gold-dark); display: block; margin-bottom: 2px; }
-        .meta-pill-value { color: var(--text-main); font-weight: 500; }
-
-        .details-pane { display: flex; flex-direction: column; gap: 22px; }
-        .info-block { background: #ffffff; border-left: 4px solid var(--accent-gold); padding: 16px 20px; border-radius: 0 10px 10px 0; background: linear-gradient(to right, rgba(247, 238, 215, 0.25), transparent); }
-        .info-block-title { font-family: 'Cinzel', serif; font-size: 1.08rem; font-weight: 700; color: #1a202c; margin-bottom: 8px; }
-        .info-block p { font-size: 0.96rem; color: #374151; text-align: justify; line-height: 1.65; }
-
-        footer { background: #14171a; color: #9ca3af; text-align: center; padding: 40px 20px; border-top: 1px solid #2d3139; font-size: 0.9rem; }
-        .credits { color: var(--accent-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
         .back-btn-hero {
-    position: absolute;
-    top: 24px;
-    left: 24px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--accent-gold);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    padding: 8px 16px;
-    border: 1px solid rgba(179, 135, 40, 0.4);
-    border-radius: 25px;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(6px);
-    transition: all 0.2s ease;
-}
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 8px 16px;
+            border: 1px solid rgba(179, 135, 40, 0.4);
+            border-radius: 25px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            transition: all 0.2s ease;
+        }
 
-.back-btn-hero:hover {
-    background: var(--accent-gold);
-    color: #14171a;
-    border-color: var(--accent-gold);
-    transform: translateY(-1px);
-}
+        .back-btn-hero:hover {
+            background: var(--accent-gold);
+            color: #14171a;
+            border-color: var(--accent-gold);
+            transform: translateY(-1px);
+        }
 
-@media (max-width: 600px) {
-    .back-btn-hero {
-        position: static;
-        margin-bottom: 20px;
-    }
-}
+        @media (max-width: 768px) {
+            .back-btn-hero {
+                position: static;
+                margin-bottom: 20px;
+                display: inline-flex;
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            padding: 6px 16px;
+            border: 1px solid rgba(179, 135, 40, 0.4);
+            border-radius: 30px;
+            margin-bottom: 20px;
+            background: rgba(179, 135, 40, 0.08);
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 1.15rem;
+            color: #c7cbd1;
+            max-width: 780px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .toc-bar {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 18px 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .toc-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold-dark);
+            margin-right: 8px;
+        }
+
+        .toc-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.84rem;
+            font-weight: 500;
+            padding: 5px 12px;
+            background: var(--bg-card-alt);
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--accent-gold-light);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold-dark);
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .artwork-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 50px;
+            overflow: hidden;
+            scroll-margin-top: 30px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .artwork-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .artwork-header {
+            background: linear-gradient(to right, #1a202c, #2d3748);
+            color: #ffffff;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .artwork-title-group h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .artwork-title-group .author {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 1.1rem;
+            color: #d1d5db;
+            font-style: italic;
+        }
+
+        .number-badge {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.08);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(179, 135, 40, 0.4);
+        }
+
+        .artwork-content {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 36px;
+            padding: 32px;
+        }
+
+        @media (max-width: 960px) {
+            .artwork-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .image-pane {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .frame-wrapper {
+            position: relative;
+            background: #11141a;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid #2d3139;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+        }
+
+        .artwork-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: contain;
+            border-radius: 4px;
+            display: block;
+            background: #1a1d24;
+            transition: transform 0.3s ease;
+        }
+
+        .frame-wrapper:hover .artwork-img {
+            transform: scale(1.015);
+        }
+
+        .image-caption {
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+            width: 100%;
+        }
+
+        .meta-pill {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+
+        .meta-pill-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.68rem;
+            letter-spacing: 0.5px;
+            color: var(--accent-gold-dark);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .meta-pill-value {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .details-pane {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .info-block {
+            background: #ffffff;
+            border-left: 4px solid var(--accent-gold);
+            padding: 16px 20px;
+            border-radius: 0 10px 10px 0;
+            background: linear-gradient(to right, rgba(247, 238, 215, 0.25), transparent);
+        }
+
+        .info-block-title {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-block-title svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--accent-gold-dark);
+            flex-shrink: 0;
+        }
+
+        .info-block p {
+            font-size: 0.96rem;
+            color: #374151;
+            text-align: justify;
+            line-height: 1.65;
+        }
+
+        footer {
+            background: #14171a;
+            color: #9ca3af;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #2d3139;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            max-width: 600px;
+            margin: 0 auto 10px;
+        }
+
+        footer .credits {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
@@ -159,16 +432,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Obraz zachycuje předního českého empírového sochaře a řezbáře Josefa Malínského u rozpracovaného díla. Z jeho tváře vyzařuje soustředění, intelektuální hloubka a hrdé sebevědomí měšťanského umělce nastupujícího národního obrození.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Plátno představuje předního empírového sochaře a řezbáře Josefa Malínského přímo při tvůrčím procesu. Nesedí v žádné strojené póze, ale v civilním, uvolněném domácím oděvu u svého pracovního stolu. V ruce třímá dřevěnou sochařskou paličku a dláto, kterými právě opracovává plastiku. Z jeho tváře s pronikavým pohledem vyzařuje intelektuální soustředění a hrdé sebevědomí tvůrce, který se neopírá o šlechtické tituly, ale o vlastní řemeslnou zručnost a talent.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Antonín Machek opustil chladnou aristokratickou stylizaci a vytvořil vřelý, psychologicky pravdivý portrét svého blízkého přítele. Vyniká detailní modelace tváře a civilní přirozené světlo.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Obraz nevznikl na panskou zakázku, ale z vnitřní potřeby zachytit rodící se elitu českého národního obrození. Antonín Machek tímto dílem pomáhal definovat nový žánr – měšťanský portrét. Malba oslavuje svobodného umělce jako váženého člena společnosti, který se prosazuje vlastním dílem v probouzející se Praze počátku 19. století.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Portrét patří k nejvýznamnějším dokladům raného měšťanského portrétu v Čechách a reprezentuje kulturní elitu probouzející se Prahy počátku 19. století.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Machek a Malínský byli celoživotní blízcí přátelé a spolubojovníci za emancipaci českého umění. Josef Malínský byl ve své době nejvytíženějším pražským kameníkem (autorem stovek náhrobků na Olšanských a Malostranských hřbitovech). Traduje se, že Machek tento portrét vytvořil v době, kdy oba umělci v pražských kavárnách vášnivě plánovali založení nezávislého českého výtvarného spolku, který by vymanil pražskou Akademii ze zkostnatělého vídeňského vlivu.</p>
                     </section>
                 </div>
             </div>
@@ -197,16 +479,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Zobrazuje elegantní dámu z vysoké pařížské společnosti ve večerních luxusních šatech v doprovodu ušlechtilého chrta, který podtrhuje graciézní siluetu ženy.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Obraz zachycuje elegantní aristokratku ve večerní toaletě z těžkého tmavého hedvábí, lemovaného luxusní kožešinou. Po jejím boku stojí štíhlý anglický chrt. Přítomnost chrta není náhodná – jeho štíhlá, graciézní anatomie zrcadlí ladné křivky dámy a podtrhuje její vznešenost. Pes zde funguje jako pradávný symbol ušlechtilého původu, věrnosti a vytříbeného vkusu.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Brožík v tomto díle demonstruje virtuózní akademickou techniku – lesk hedvábí, měkkost kožešin a rafinovanou světelnou harmonii.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Václav Brožík byl v 90. letech 19. století evropskou celebritou, profesorem na pražské Akademii a členem prestižního pařížského Institutu. Vedle monumentálních historických kompozic byl jedním z nejlépe placených portrétistů pařížské a pražské honorace. Tento obraz vznikl jako zakázka reprezentující společenský status a bohatství portrétované rodiny na pařížském Salonu.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Dílo reprezentuje vrchol Brožíkovy pozdní portrétní tvorby francouzského období.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Brožíkův raketový úspěch v Paříži byl úzce spjat s jeho sňatkem s Hermínou Sedelmeyerovou, dcerou jednoho z nejbohatších a nejvlivnějších světových obchodníků s uměním Charlese Sedelmeyera. Tento sňatek Brožíkovi otevřel dveře k nejbohatší mezinárodní klientele. Malíř byl pověstný svou neuvěřitelnou schopností namalovat strukturu látek – tvrdilo se, že podle jeho pláten dokázali pařížští krejčí přesně určit gramáž a původ hedvábí.</p>
                     </section>
                 </div>
             </div>
@@ -235,16 +526,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Idylický žánrový výjev z venkovského života: v prosluněné selské jizbě matka nalévá mléko a rozděluje chléb dětem. Oslava harmonie rodinného života.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Idylický a živý výjev z venkovské roubené jizby. Matka rozlévá čerstvě nadojené mléko a dělí pecen chleba mezi houf dětí. Každé z dětí má vlastní psychologický výraz: nejmenší netrpělivě natahuje hliněnou misku, starší sourozenec dohlíží na mladšího a scéna je doplněna spícím psem a kočkou. Celým pokojem prostupuje proud ranního slunce, který dopadá skrze otevřené dveře na dřevěnou podlahu.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Waldmüller prosazoval malbu podle skutečnosti za přirozeného denního světla, čímž předjímal principy plenérismu a impresionismu.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Waldmüller byl hlavním představitelem vídeňského biedermeieru, avšak tento žánr zcela proměnil. Odmítal sentimentální kašírované výjevy a chtěl zachytit skutečný, nepřikrášlený život venkovského lidu, v němž spatřoval morální čistotu, rodinnou soudržnost a řád, který se z tehdejších velkoměst vytrácel.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Špičkový reprezentant vídeňského biedermeieru v pražských sbírkách.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Waldmüller byl na vídeňské Akademii považován za radikálního kacíře. Zuřivě bojoval proti tomu, aby se studenti učili malovat kopírováním starých mistrů v zatuchlých ateliérech, a nutil je chodit malovat ven na přímé slunce. Vedení akademie ho kvůli těmto „podvratným“ metodám zbavilo profesury a předčasně penzionovalo. Svým zachycením denního světla a stínů však předběhl francouzský impresionismus o celá dvě desetiletí.</p>
                     </section>
                 </div>
             </div>
@@ -273,16 +573,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Na zasněženém pavlačovém dvorku pražského Židovského Města leží bezvládné tělo zavražděné dívky. Obraz se soustředí na tragédii chudoby a bezmoci.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Sychravý zimní den na pavlačovém dvorku pražského Židovského Města. Na špinavém sněhu leží bezvládné, zkrvavené tělo mladé dívky – pravděpodobně chudé švadlenky nebo služky. Kolem se sbíhají obyvatelé pavlačí: shrbená stařena v šátku, dělník v zástěře a polekané ženy. Plátno neukazuje vraha ani boj; Schikaneder se záměrně soustředí na mrazivé ticho těsně po činu, na bezmoc a všudypřítomnou tíhu bídy velkoměsta.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Schikanederovo životní mistrovské dílo vzniklo pod vlivem naturalismu v době chystané asanace staré Prahy.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Obraz vznikl jako Schikanederova reakce na plánovanou asanaci pražského Josefova a na kritické sociální poměry v tehdejší Praze. Malíř chtěl vytvořit monumentální naturalistické memento – poukázat na temná zákoutí společnosti, která tehdejší měšťanská vrstva raději přehlížela.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Dílo vzbudilo senzaci na Zemské jubilejní výstavě v Praze roku 1891 a dnes je ikonou české malby 19. století.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Schikaneder obraz připravoval celé měsíce s až forenzní pečlivostí. Aby dosáhl přesné perspektivy a dramatického osvětlení šerého dvora, postavil si ve svém ateliéru zmenšený třírozměrný sádrový model pavlačového domu a figurky osvětloval svíčkami. Když byl obraz vystaven na Jubilejní zemské výstavě roku 1891, způsobil senzaci. Lidé před ním stáli v zástupech a dobový tisk vedl vášnivé debaty, kdo byl skutečným vrahem dívky.</p>
                     </section>
                 </div>
             </div>
@@ -311,16 +620,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Atmosféra u pařížské podzemní dráhy s kouřem vlaků, plynovými lucernami a spěchajícími chodci ve večerním šeru.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Pařížský podvečer zalitý namodralým šerem a kouřem. Z podzemního výkopu a stanice podzemní dráhy stoupají husté kotouče bílé páry, které se mísí s chladným vzduchem. Mezi plynovými lucernami spěchají Pařížané v cylindrech a dlouhých kabátech. Obraz zachycuje fascinující střet starého romantického světa kočárů s novým věkem podzemní techniky a elektřiny.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Luigi Loir byl mistrem pařížských městských motivů s citem pro kouř, mokrý asfalt a umělé osvětlení.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Na sklonku 19. století se Paříž horečně připravovala na velkolepou Světovou výstavu roku 1900 a stavba první linky metra (<em>Métropolitain</em>) byla symbolem technologického triumfu Francie. Luigi Loir, zvaný „malíř pařížských bulvárů“, chtěl zachytit tento historický zlom, kdy se město proměňovalo před očima.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Součást francouzské sbírky Národní galerie v Praze.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Loir byl pověstný svou posedlostí malovat za každého počasí. V dešti, vánici i husté mlze stával na ulicích se speciálním malířským stojanem chráněným deštníkem. Proslul jako nepřekonatelný mistr v míchání barev pro „mokrý asfalt“ – dokázal zachytit přesný odlesk pouličních luceren v kalužích vody s fotografickou věrností.</p>
                     </section>
                 </div>
             </div>
@@ -349,16 +667,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Nostalgický pohled na hradčanskou uličku v zimním soumraku s osamělou postavou pod plynovou lucernou.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Zimní soumrak v tiché a opuštěné hradčanské uličce. Podél staré zdi zvolna kráčí osamělá ženská postava zahalená v černém plášti. Jediným zdrojem světla je matná žlutá záře plynové lucerny, která bojuje s postupující modravou temnotou. Scéna vyzařuje hluboký klid, nostalgii, tichou melancholii a pocit pomíjivosti lidského života.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Pozdní náladová tvorba zaměřená na ticho, samotu a mizející zákoutí staré Prahy.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Na rozdíl od své rané sociální tvorby se Schikaneder po roce 1900 uzavřel do sebe. Praha procházela divokou modernizací, mizela stará romantická zákoutí a malíř hledal útočiště v místech, kde se zastavil čas – na Hradčanech a Novém Světě. Obraz vznikl jako vizuální báseň o samotě a tichu uprostřed moderního světa.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Jeden z nejznámějších pražských motivů v českém výtvarném umění.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Schikaneder byl známý jako noční chodec. Celé hodiny osaměle bloumal noční Prahou a vnímal světelné nuance večerního šerosvitu. Tento obraz však nemaloval venku – tvořil výhradně zpaměti ve svém vinohradském ateliéru, kde měl okna zakrytá černými závěsy, aby si vytvořil přesné přítmí a mohl se plně soustředit na vnitřní paměťovou stopu.</p>
                     </section>
                 </div>
             </div>
@@ -387,16 +714,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Pohled na řetězový Eliščin most s rušným provozem kočárů, chodců a tramvají pod kouřovým pražským nebem.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Dynamický pohled na starý řetězový Eliščin most přes Vltavu (stával na místě dnešního Štefánikova mostu). Plátno vibruje pohybem: po mostě přecházejí dělníci, projíždějí kočáry a tramvaje, zatímco parníky na řece chrlí oblaka kouře. Obloha je těžká, nasáklá uhelným dýmem pražských továren. Slavíček zachytil syrovou, pulzující energii velkoměsta na počátku 20. století.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Slavíček dynamickým rukopisem zachytil pulzující energii a chvění vzduchu moderního velkoměsta.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Slavíček odmítal malovat Prahu jako historický skanzen pro turisty. Chtěl ukázat její moderní, industriální a dělnickou tvář. Obraz vznikl v době, kdy už bylo rozhodnuto o demolici starého mostu, a Slavíček spěchal zachytit jeho jedinečnou konstrukci v kontextu moderního pražského života.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Klíčové dílo českého impresionismu ze sbírek Národní galerie.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Slavíček maloval v neuvěřitelném fyzickém vypětí. Během práce na tomto plátně stával na nábřeží v třeskutém větru a mrazu, nanášel pastózní barvy rychlými, až agresivními údery štětce. Traduje se, že barvy do plátna místy vtlačoval přímo prsty a špachtlí, aby vystihl chvění znečištěného městského vzduchu, čímž položil základy českému expresionismu.</p>
                     </section>
                 </div>
             </div>
@@ -425,16 +761,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Pohled přes řeku Seinu na výstavní palác Trocadéro a nábřeží v Paříži pod širokým francouzským nebem.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Širokoúhlý pohled přes klidnou hladinu řeky Seiny na velkolepý maursko-byzantský palác Trocadéro na horizontu. V popředí kotví říční čluny a po nábřeží kráčejí drobné postavy chodců. Celou horní polovinu plátna opanovala monumentální klenba francouzského nebe plná jemných mraků, jejichž světlo se zrcadlí na vodní hladině.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Chittussi propojil francouzskou barbizonskou krajinomalbu s realistickým zachycením architektury a vodní hladiny.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Chittussi odešel do Francie po těžkých životních zklamáních v Čechách. Chtěl dokázat, že český malíř dokáže vstřebat moderní plenérovou malbu francouzské barbizonské školy a postavit se po bok pařížské špičce. Obraz zachycuje monumentální stavbu vytvořenou pro Světovou výstavu roku 1878 a znamenal Chittussiho mezinárodní průlom.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Významný mezník vymanění české krajinomalby z německého akademismu.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Před svým odchodem do Paříže narukoval Chittussi jako dobrovolník do rakousko-uherské armády během okupace Bosny a Hercegoviny. Ve válce onemocněl tyfem a málem zemřel. Právě francouzská krajina podél řeky Seiny a lesy ve Fontainebleau pro něj znamenaly psychickou i uměleckou záchranu. Tento obraz mu vynesl uznání na oficiálním pařížském Salonu, což byl pro českého krajináře té doby nevídaný úspěch.</p>
                     </section>
                 </div>
             </div>
@@ -463,16 +808,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Vodní mlýn na řece Epte v Giverny s odlesky slunce ve vodních proudech a vrbovým porostem.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Zákoutí na řece Epte v normandské vesničce Giverny. Starobylý dřevěný mlýn stojí přímo nad dravým vodním proudem, který pění a rozbíjí se o stavidla. Hladina řeky je pokryta odlesky slunce a zrcadlí se v ní bujné větve smutečních vrb. Plátno je oslavou světla, vody a svěží zeleně v horkém letním dni.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Radimský maloval v sousedství Clauda Moneta technikou čistého francouzského impresionismu.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Radimský žil v Giverny v přímém sousedství otce impresionismu Clauda Moneta. Byl natolik fascinován atmosférou řeky Epte, že si v tamním mlýně zřídil ateliér. Obraz vznikl jako čistě impresionistická studie proměny světla na tekoucí vodní hladině.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Dílo slavilo úspěch na pařížském Salonu a představilo impresionismus českému publiku.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Radimský byl jediným českým malířem, který byl plně přijat do mezinárodní kolonie impresionistů v Giverny a s Monetem se osobně stýkal. Aby mohl malovat řeku z bezprostřední blízkosti, nechal si postavit speciální plovoucí ateliér – loďku ukotvenou přímo uprostřed toku řeky. Ve Francii dosáhl takového komerčního úspěchu, že si v Giverny koupil vlastní zámeček a byl jedním z prvních lidí v kraji, kteří vlastnili soukromý automobil.</p>
                     </section>
                 </div>
             </div>
@@ -501,16 +855,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Monumentální koruna starého buku, skrze jejíž listoví dopadají zářivé sluneční paprsky na lesní půdu.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Monumentální lesní interiér, jemuž dominuje mohutný kmen prastarého buku. Skrze hustou zelenou a zlatavou korunu stromu pronikají ostré vertikální kužely poledního slunce, které dopadají na lesní půdu pokrytou tlejícím listím a mechem. Divák má pocit, jako by stál uvnitř přírodní katedrály.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Belgický luminismus s pastózní texturou barvy nanášené špachtlí.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Belgický malíř Frans Courtens byl vůdčí osobností tzv. dendermondské školy a severského luminismu. Odmítal jemnou a uhlazenou francouzskou techniku a chtěl zachytit syrovou, panteistickou a živelnou sílu severské přírody v jejím nejintenzivnějším světle.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Reprezentant mezinárodního luminismu ve sbírkách Národní galerie.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Courtens byl známý tím, že u svých pláten téměř nepoužíval jemné štětce. Barvu na plátno házel a nanášel v silných nánosech zednickou lžící, špachtlí a holýma rukama. Vytvářel tím téměř reliéfní strukturu kůry a lesního podrostu. Když byl tento obraz v 90. letech 19. století vystaven v Praze, způsobil šok mezi studenty Akademie a zásadně ovlivnil mladého Antonína Slavíčka v jeho odvaze k pastózní malbě.</p>
                     </section>
                 </div>
             </div>
@@ -539,16 +902,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Lesní potok vinoucí se údolím s třpytivými slunečními skvrnami pronikajícími korunami stromů.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Kamenité koryto lesního potoka vinoucí se stinným údolím. Tmavý stín stromů je rozbit desítkami zářivých, třpytivých skvrn slunečního světla, které pronikají korunami a tančí na hladině vody i na vlhkých balvanech. Výjev zachycuje prchavý okamžik chladivého lesního ticha v kontrastu s prudkým letním žárem.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Přechod od mařákovského šerosvitu k impresionistickému vyjádření světla v plenéru.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Obraz vznikl během slavných letních plenérových pobytů studentů krajinářské školy Julia Mařáka na Okoři. Hudeček se tímto plátnem začal vymaňovat z vlivu tradičního romantického lesního šerosvitu a odvážně vstoupil na pole moderního impresionistického vidění.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Rané dílo jednoho z nejvýznamnějších českých krajinářů.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Na Okoři tvořila celá parta mladých malířů (Hudeček, Slavíček, Prucha), kteří žili velmi divokým bohémským životem. Místní sedláci si zpočátku mysleli, že malíři se stojany v potocích jsou blázni nebo cizí zeměměřiči. Hudeček stával při malování tohoto obrazu celé hodiny po kolena v ledové vodě potoka, aby detailně vystihl, jak se sluneční světlo láme na mokrých kamenech pod hladinou.</p>
                     </section>
                 </div>
             </div>
@@ -577,16 +949,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Krajinný výsek řeky Marny s klidnou hladinou a stromy na protějším břehu v teplém světle.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Poklidná hladina francouzské řeky Marny zalitá měkkým odpoledním sluncem. Na protějším břehu se zrcadlí hustá řada stromů vrhajících dlouhé stíny do vody, zatímco u břehu tiše kotví dřevěná pramička. Kompozice působí nesmírně harmonickým, až meditačním dojmem.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Kupkovo rané pařížské realisticko-impresionistické období před přechodem k abstrakci.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Dílo pochází z Kupkova raného pařížského období. Po příchodu z Vídně žil v chudobě a živil se jako satirický ilustrátor pro časopisy. Volné chvíle trávil u řeky Marny, kde maloval ještě realisticko-impresionistické krajiny a zkoumal čisté optické vlastnosti barevného spektra.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Cenný doklad počátků tvorby světoznámého průkopníka abstrakce.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Ačkoliv je tento obraz ještě realistický, obsahuje v sobě zárodek světové revoluce v umění. Právě sledování kruhů na vodní hladině, odrazů světla a rytmu vln na řece Marně přivedlo Kupku k myšlence, že obraz nemusí zobrazovat konkrétní předměty, ale může být čistým vyjádřením rytmu, pohybu a energie barev. O patnáct let později namaloval svou slavnou <em>Amorfu – Dvoubarevnou fugu</em>, čímž stvořil první abstraktní díla v dějinách světového malířství.</p>
                     </section>
                 </div>
             </div>
@@ -615,16 +996,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Mystická noční scenérie pobřeží s plachetnicemi a měsícem prosvítajícím skrze mraky jako symbol věčnosti.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Mystická a tichá noční scenérie arktického pobřeží. Z temné pláže vystupují obří balvany, nad hladinou moře prosvítá skrze mraky plný měsíc a jeho stříbrná záře osvětluje vzdálené siluety plachetnic plujících po klidné hladině. Každý prvek má hluboký symbolický význam: balvany představují pevnou křesťanskou víru na zemi, moře je symbolem věčnosti a lodě představují lidské duše putující životem k posmrtnému přístavu.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Vrchol německého romantismu s precizní lazurní technikou a křesťansko-filozofickou symbolikou.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Friedrich byl nejvýznamnějším představitelem německého romantismu. Tento obraz namaloval v období hluboké vnitřní izolace a melancholie. Chtěl vytvořit vizuální oltář pro tichou duchovní meditaci diváka, v němž se člověk konfrontuje s nekonečností vesmíru a Boží přítomností v přírodě.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Jedno z nejcennějších děl zahraničního romantismu v českých veřejných sbírkách.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Friedrich své slavné noční obrazy maloval zásadně ve dne ve svém drážďanském ateliéru, který měl zcela vyklizený a okna zatemněná černými okenicemi s pouhou úzkou štěrbinou. Tvrdil, že umělec musí nejprve zavřít své tělesné oči a ponořit se do absolutní tmy, aby mohl spatřit obraz svým vnitřním, duchovním zrakem. Toto plátno je dnes považováno za vůbec nejcennější zahraniční dílo romantismu na území České republiky.</p>
                     </section>
                 </div>
             </div>
@@ -653,16 +1043,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Zasněžená česká pláň za mrazivé noci s osamělým poutníkem směřujícím k chalupě se zářícím oknem.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Tichá česká vesnická krajina přikrytá hlubokým sněhem pod jasnou mrazivou noční oblohou. Na obloze září měsíc, jehož stříbřité světlo modeluje sněhové návěje. Uprostřed pláně stojí osamělá roubená chalupa, z jejíhož malého okénka sálá teplé, zlatavé světlo svíčky. K tomuto světlu se po zasněžené cestě brodí osamělý poutník. Výjev je mistrným ztělesněním naděje, domova a tepla uprostřed mrazivé prázdnoty.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Baladická hloubka a čistá poetika české krajiny od zakladatele domácího krajinářského realismu.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Kosárek vytvořil toto dílo na vrcholu svých tvůrčích sil, ačkoliv už byl v té době těžce nemocen tuberkulózou. Chtěl zachytit hlubokou baladickou duši české krajiny, v níž se mísí melancholie, tvrdý život venkovského lidu a hluboká lidská touha po bezpečí domova.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Klenot české krajinomalby 19. století ve sbírkách Národní galerie.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Adolf Kosárek byl ryzím géniem české malby, který zemřel v naprosté chudobě v pouhých 29 letech. Za svého života prodával svá mistrovská díla pražským překupníkům za pár zlatých, aby měl na základní jídlo a barvy. V <em>Zimní noci</em> dosáhl tak dokonalé iluze vnitřního světla z okna, že doboví návštěvníci výstav podezřívali pořadatele, že za plátnem schovávají rozsvícenou svíčku. Dnes je Kosárek uctíván jako zakladatel novodobé české krajinomalby.</p>
                     </section>
                 </div>
             </div>
@@ -691,16 +1090,25 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">1. Příběh, který obraz zobrazuje (Ikonografie a námět)</h3>
-                        <p>Starozákonní Kain prchá v křečovitém gestu hrůzy a zoufalství před Božím hněvem do pusté pouště.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Dramatický starozákonní výjev: první vrah v dějinách lidstva Kain prchá po zavraždění svého bratra Ábela do nehostinné pouště. Kain je zobrazen jako nahý, svalnatý muž v křečovitém běhu, který si v panické hrůze chrání rukama hlavu před hněvem nebes. Na jeho čele plane krvavé Kainovo znamení viny. Z jeho tváře se zračí absolutní děs, šílenství a tíha neodčinitelného hříchu.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">2. Příběh vzniku díla (Umělecko-historický kontext)</h3>
-                        <p>Spojení akademismu, temného romantismu a symbolismu s expresivním šerosvitem.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.69-.62C10.03 21.64 11 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                            2. Proč obraz vznikl & historické pozadí
+                        </h3>
+                        <p>Emanuel Krescenc Liška namaloval Kaina během svého prestižního stipendijního pobytu v Římě. Reagoval na dobové proudy evropského symbolismu a pozdního akademismu. Nešlo mu o ilustraci Bible, ale o univerzální psychologickou studii rozkladu lidského svědomí pod tíhou spáchaného zločinu.</p>
                     </section>
                     <section class="info-block">
-                        <h3 class="info-block-title">3. Historie a provenience obrazu</h3>
-                        <p>Ukázka monumentální dramatické malby závěru 19. století v Čechách.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            3. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Liška patřil k mimořádně talentované generaci Národního divadla. Aby dokázal věrně zachytit křečovité napětí svalů a hrůzu v Kainově těle, navštěvoval v Římě nemocnice, márnice a prováděl anatomické skici. Obraz působí neobyčejně moderně tím, že neukazuje samotný násilný akt, ale čistě vnitřní psychologické peklo člověka, před kterým nelze nikam utéct.</p>
                     </section>
                 </div>
             </div>
@@ -728,8 +1136,18 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">Zobrazený výjev & Kontext</h3>
-                        <p>Tvorba Františka Matouška pracuje s originálním uspořádáním objektů, architektonickým řádem a grafickým designem meziválečné avantgardy.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Významný meziválečný avantgardní experimentátor, člen legendární <em>Skupiny 42</em> a <em>SVU Mánes</em>. Matoušek se ve svých pracích nezaměřoval na klasickou malbu, ale na civilismus, městskou poetiku a geometrický řád moderního světa.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            2. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Matoušek byl světovým průkopníkem práce s netradičními materiály. Vymyslel unikátní techniku vytrhávané a vrstvené džínoviny (denimu) a textilních koláží, z nichž vytvářel strukturální reliéfy desítky let předtím, než se textilní umění stalo běžnou součástí moderní scény.</p>
                     </section>
                 </div>
             </div>
@@ -752,8 +1170,11 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">Zobrazený výjev & Kontext</h3>
-                        <p>Strukturální a grafické dílo odrážející experimenty s materiálovou koláží a textilem.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Strukturální a grafické dílo odrážející experimenty s materiálovou koláží a textilem. Reflektuje meziválečné avantgardní snahy o prolnutí volného umění s designem, užitým uměním a novými, často surovými materiály.</p>
                     </section>
                 </div>
             </div>
@@ -776,8 +1197,18 @@
                 </div>
                 <div class="details-pane">
                     <section class="info-block">
-                        <h3 class="info-block-title">Zobrazený výjev & Kontext</h3>
-                        <p>Vrak auta v bezútěšném prostředí jako symbol úzkosti a vybledlé paměti vytvořený technikou proškrabávání voskového podkladu tuší.</p>
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            1. Příběh a ikonografie výjevu
+                        </h3>
+                        <p>Jeden z nejvýznamnějších současných českých malířů. Obraz zachycuje vrak automobilu v bezútěšném, rozpadajícím se prostředí, které připomíná normalizační paneláková sídliště 80. let. Vrak funguje jako symbol dětské úzkosti, zranitelnosti a vytěsněných traumat z minulosti.</p>
+                    </section>
+                    <section class="info-block">
+                        <h3 class="info-block-title">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            2. Zákulisí tvorby & autorova zajímavost
+                        </h3>
+                        <p>Bolf proslul svou specifickou a fyzicky náročnou technikou: plátno pokryje vrstvou vosku, přemaluje černou tuší a následně do něj vyrývá a proškrabává linky jehlou či skalpelem. Výsledný obraz má charakter syrového dětského snu či dystopického komiksu.</p>
                     </section>
                 </div>
             </div>
